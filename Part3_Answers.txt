@@ -7,10 +7,21 @@ b) Python has a module SimpleHttpServer which can be used for creating local ser
 
    This command creates a local server on the device it is executed on.
 
-   A user in the same network can access the files in the directory of    execution of the command provided the URL typed contains the IP address    of the device within the network (eg 192.168.1.102)
+   A user in the same network can access the files in the directory of execution of the command provided the URL typed contains the IP address    of the device within the network (eg 192.168.1.102)
 
-c) NginX, Apache are webserver softwares used for configuring hosting    websites on a webserver.
+c) NginX, Apache are webserver softwares used for configuring hosting websites on a webserver.
 
-d) The method won't work as IITD Wifi and Mobile data are independent    networks. The IP address of the server created by the python module would    be allotted an IP address reserved within the local network only.
+d) The method won't work as IITD Wifi and Mobile data are independent networks. The IP address of the server created by the python module would    be allotted an IP address reserved within the local network only.
 
-2. Databases are used for data manipulation i.e storage, retrieval when the    amount of data is large. 
+2. Databases are used for data manipulation i.e storage, retrieval when the amount of data is large. For storing the given data, a No SQL DB would be more beneficial due to dynamic data storage for research, project related data of a Professor. The type of data can be very varied and it would be more beneficial implementing it this way than with a fixed schema. MongoDB would be a good choice since it is open source and quite popular too. The data can be stored in a format similar to:
+{
+	name:"Professor name",
+	department:"Department",
+	qualification: [{//Stores further info}]
+	research: [{}],M
+	courses_taught: [{}],
+}
+
+3.
+jS timers return less precise values due to security exploits Meltdown and Spectre, which can potentially access the memory of the user's device. This is caused due to a vulnerability in modern Intel processors. This is caused due to unauthorized memory addresses having data loaded in the CPU cache temporarily. The technique used is to read every address in high speed which can potentially reveal vulnerable data.
+ 
