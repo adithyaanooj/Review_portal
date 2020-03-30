@@ -1,0 +1,6 @@
+The best method would be to use a mix of both, zipping files on runtime for a course with less(a threshold can be set) number of users 
+registered and storing zip files for large courses. This way, hard disk space and computation power are optimized. This however, requires 
+a database table with entries of all courses and their number of registered users. For a popular course, whenever a user uploads a file, 
+the old zip file is discarded and a new file is saved. This reduces the number of times the zip process is used because the probability of
+a user uploading is less than that of a user downloading. In the case of the course having fewer registrations, the zip can be generated at
+runtime.
