@@ -1,0 +1,14 @@
+{% extends "Reviews/base.html" %}
+{% block body_block %}
+
+{% if prof_list %}
+<table><tr><td>Name</td><td>Rating</td><td>Department</td></tr>
+    <ul style="list-style-type:none">
+        {% for c in prof_list %}
+            <tr><h4><li><td><a href="{% url 'prof_view' c.id %}">{{ c.Name }}</a></td><td>{{ c.Ratings }}</td><td> {{ c.Department }}</td></li></h4></tr>
+        {% endfor %}
+    </ul>
+    </table>
+    {% else %} <p>Prof data missing</p>
+{% endif %}
+{% endblock %}

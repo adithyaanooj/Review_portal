@@ -1,0 +1,15 @@
+{% extends "Reviews/base.html" %}
+{% block body_block %}
+
+{% if course_list %}
+    <ul style="list-style-type:none">
+        <table>
+            <tr><td>Course Code:</td><td>Rating:</td></tr>
+        {% for c in course_list %}
+            <tr><li><td><a href="{% url 'course_view' c.Course_Code %}">{{ c.Course_Code }}</a></td><td>{{ c.Ratings }}</td></li></tr>
+        {% endfor %}
+</table></ul>
+
+    {% else %} <p>No courses</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "Reviews/base.html" %}
+{% block body_block %}
+
+{% if q %}
+<p><h2>{{ q.Course_Code }} : {{ q.Name }}</h2></p>
+<p>{{ q.Description }}</p>
+{% else %} <p>No courses</p>
+{% endif %}
+<div><ul style="list-style-type:none">
+    <h3>Most helpful reviews</h3>
+    {% for a in r %}
+        <li>{% if a.Anonymous %} Anonymous {% else %} <a href="{% url 'profile' a.Student.id %}">{{ a.Student.username }}</a> {% endif %} - {{ a.Upvotes }} Upvotes<br /> <p>{{ a.Review|safe }}</p></li>
+    {% endfor %}
+    </ul>
+    <a href="{% url 'course_review_list' q.Course_Code 'Upvotes' 1 %}" > View all helpful reviews</a>
+</div>
+<div>
+    <ul style="list-style-type:none">
+    <h3>
+        Most recent reviews
+    </h3>
+{% for b in s %}
+<li>{% if b.Anonymous %} Anonymous {% else %} <a href="{% url 'profile' b.Student.id %}">{{ b.Student.username }}</a> {% endif %} - {{ b.Upvotes }} Upvotes<br /> <p>{{ b.Review|safe }}</p></li>
+{% endfor %}
+    </ul>
+    <a href="{% url 'course_review_list' q.Course_Code 'Date' 1 %}" > View all recent reviews</a>
+</div>
+<div>
+    {% if request.user.is_authenticated %}
+    {% if Reviewed %}
+    <h3>Your review:</h3>
+    {% for a in t %}
+    <p>{{ a.Upvotes }} Upvotes</p>
+    <p>{{ a.Review|safe }}</p> {% endfor %}
+    {% else %}
+    <h3>Submit your review:</h3>
+    <form action="{% url 'course_review_submit' %}" method="POST">{% csrf_token %}
+        Anonymous:<input type="checkbox" name="anon" value="1"/><br />
+        <textarea name="Review"></textarea>
+        <input type="hidden" name="CODE" value="{{ q.Course_Code }}" />
+        <input type="submit" value="Submit review" />
+    </form>{% endif %}
+    {% else %}
+    <a href="{% url 'login' %}">Login</a> to submit your review.
+    {% endif %}
+</div>
+{% endblock %}

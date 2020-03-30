@@ -1,0 +1,14 @@
+{% extends "Reviews/base.html" %}
+
+{% block body_block %}
+<form action="{% url 'check_r' %}" method="POST"> {% csrf_token %}
+    Username:<br /><input type="text" name="username" id="username" /><br/>
+    Email:<br /><input type="text" name="email" id="email" /><br />
+    First name:<br /><input type="text" name="firstname" id="firstname" /><br />
+    Last name:<br /><input type="text" name="lastname" id="lastname" /><br />
+    Password:<br /><input type="password" name="password" id="password" /><br />
+    Confirm Password:<br /><input type="password" name="confirm" id="confirm" /><br />
+    <input type="submit" value="Register" />
+</form>
+<p><a href="{% url 'login' %}">Login</a> if you already have an account.</p>
+{% endblock %}

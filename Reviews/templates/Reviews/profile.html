@@ -1,0 +1,31 @@
+{% extends "Reviews/base.html" %}
+{% block body_block %}
+    <div><h2>{{ q.username }}</h2></div>
+    <div>
+        <h3>Most recent course reviews:</h3>
+        <ul style="list-style-type:none">
+            {% for a in r %}
+            {% if a.Anonymous == False %}
+                <li>
+                    Course: {{ a.Course.Course_Code }} <br /> {{ a.Upvotes }} Upvotes
+                    <p>
+                        {{ a.Review|safe }}
+                    </p>
+                </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <h3>Most recent Professor reviews:</h3>
+        <ul style="list-style-type:none">
+            {% for a in s %}
+                {% if a.Anonymous == False %}<li>
+                    Professor: {{ a.Professor.Name }} <br /> {{ a.Upvotes }} Upvotes
+                    <p>
+                        {{ a.Review|safe }}
+                    </p>
+                </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

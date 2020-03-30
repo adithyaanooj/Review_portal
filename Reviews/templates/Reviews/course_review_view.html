@@ -1,0 +1,17 @@
+{% extends "Reviews/base.html" %}
+
+{% block body_block %}
+
+<div>
+        {% for a in page_obj %}
+            
+                {%if a.Anonymous %}Anonymous {% else %}<a href="{% url 'profile' a.Student.id%}">User: {{ a.Student.username }} </a>{% endif %} <br /> {{ a.Upvotes }} Upvotes
+                <p>
+                    {{ a.Review|safe }}
+                </p>
+            
+        {% endfor %}
+    {% if page_obj.has_previous %}<a href="{% url 'course_review_list' CODE sort page_obj.previous_page_number %}">Previous</a> {% endif %} {% if page_obj.has_next %} <a href="{% url 'course_review_list' CODE sort page_obj.next_page_number %}"> Next</a> {% endif %}
+</div>
+
+{% endblock %}

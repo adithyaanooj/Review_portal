@@ -1,0 +1,41 @@
+{% extends "Reviews/base.html" %}
+{% block body_block %}
+{% if request.user.is_authenticated %}
+<form method="POST" action="{% url 'search' %}">{% csrf_token %}<input type="text" name="search" /><input type="submit" value="search" /></form>
+<div>
+    <h2>Recent Professor Reviews:</h2>
+    <ul style="list-style-type:none">
+        {% for a in q %}
+            <li>
+                Professor: {{ a.Professor.Name }} <br /> {{ a.Upvotes }} Upvotes
+                <p>
+                    {{ a.Review|safe }}
+                </p>
+            </li>
+            <a href="{% url 'user_prof_review_list' 1 %}">View all my prof reviews</a>
+        {% endfor %}
+    </ul>
+    <h2>Recent Course Reviews:</h2>
+    <ul style="list-style-type:none">
+        {% for a in r %}
+            <li>
+                Course: {{ a.Course.Course_Code }} <br /> {{ a.Upvotes }} Upvotes
+                <p>
+                    {{ a.Review|safe }}
+                </p>
+            </li>
+            
+        {% endfor %}
+        <a href="{% url 'user_course_review_list' 1 %}">View all my course reviews</a>
+    </ul>
+</div>
+
+
+{% else %}
+<div><h2>Welcome, guest.</h2>
+<p>You are free to browse reviews on courses and professors, along with their profiles. However, to access all features, you are required to
+    <a href="{% url 'login' %}">login</a> or <a href="{% url 'register' %}">register</a> if you don't have an account yet.
+</p>
+</div>
+{% endif %}
+{% endblock %}
